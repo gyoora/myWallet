@@ -11,6 +11,25 @@
             require_once "Views/cadastro.php";
         }
 
+        public function cadastrar() {
+            if($_SERVER["REQUEST_METHOD"] == "POST") {
+                $valido = true;
+                if(empty($_POST["nome"]) || $_POST["nome"] == 0) {
+                    $valido = false;
+                }
+                if(empty($_POST["email"]) || $_POST["email"] == 0) {
+                    $valido = false;
+                }
+                if(empty($_POST["senha"]) || $_POST["senha"] == 0) {
+                    $valido = false;
+                }
+
+                if($valido) {
+                    
+                }
+            }
+        }
+
         public function telaLogin() {
             require_once "Views/login.php";
         }

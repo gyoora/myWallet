@@ -23,15 +23,15 @@
         <p>Preencha seus dados</p>
         <div class="form-group">
             <i class="fas fa-user"></i>
-            <input type="text" placeholder="Nome">
+            <input type="text" placeholder="Nome" name="nome">
         </div>
         <div class="form-group">
             <i class="fas fa-envelope"></i>
-            <input type="email" placeholder="E-mail">
+            <input type="email" placeholder="E-mail" name="email">
         </div>
         <div class="form-group">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Senha">
+            <input type="password" placeholder="Senha" name="senha">
         </div>
         <button>CADASTRAR</button>
     </div>
