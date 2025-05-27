@@ -10,5 +10,9 @@
         public function telaCadastro() {
             require_once "Views/cadastro.php";
         }
+
+        public function telaLogin() {
+            require_once "Views/login.php";
+        }
     }
 ?>

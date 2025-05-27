@@ -14,7 +14,7 @@
             <h1>MyWallet</h1>
             <h2>Bem-vindo<br>de volta!</h2>
             <p>Acesse sua conta agora<br>mesmo.</p>
-            <button>ENTRAR</button>
+            <button><a href="login">ENTRAR</a></button>
         </div>
         <img src="img/dim-feliz.png" alt="Dinheirinho feliz">
     </div>

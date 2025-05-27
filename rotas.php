@@ -30,5 +30,6 @@
 	$route = new Rotas();
 	$route->get("/", [HomeController::class, "home"]);
 	$route->get("/cadastro", [MyWalletController::class, "telaCadastro"]);
+	$route->get("/login", [MyWalletController::class, "telaLogin"]);
 
 ?>
