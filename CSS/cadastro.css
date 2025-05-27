@@ -1,141 +1,128 @@
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
-
-body, html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+body {
     font-family: 'Poppins', sans-serif;
-    background-color: #fff;
-}
-
-.container {
     display: flex;
-    width: 100vw;
     height: 100vh;
-    background-color: #fff;
+    overflow: hidden;
 }
-
-.content {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: start;
-    padding: 60px 30px;
-    height: 100vh;
-    gap: 10px;
-}
-
-.content button {
-    max-width: 40%;
-}
-
 .left {
-    height: 100vh;
-    background-color: #A0D6A3;
-    flex: 1;
+    background-color: #8CC484;  
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    color: white;
+    justify-content: space-between; 
+    padding: 82px 40px 0 80px; 
+    color: #FFFEFE;
+    position: relative;
+    text-align: left;
 }
-
+.left .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    max-width: 300px;
+    line-height: 1.4;
+}
 .left h1 {
-    font-size: 48px;
-    font-weight: 700;
-    font-family: "Poltawski Nowy", serif;
+    font-family: 'Poltawski Nowy', serif;
+    font-size: 62px;
+    margin-bottom: 20px;
 }
-
 .left h2 {
-    margin-top: 20px;
-    font-size: 24px;
+    font-size: 33px;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
-
 .left p {
-    margin: 10px 0 30px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.left button {
+    background-color: transparent;
+    border: 2px solid #FFFEFE;
+    border-radius: 20px;
+    padding: 10px 30px;
     font-size: 16px;
+    font-weight: 600;
+    color: #FFFEFE;
+    cursor: pointer;
+    transition: 0.5s;
 }
 
-.left button {
-    padding: 10px 25px;
-    background: transparent;
-    border: 2px solid white;
-    border-radius: 20px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
+.left button:hover {
+    background-color: #79a972;
 }
 
 .left img {
-    max-width: 150px;
-    align-self: center;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 400px;
 }
-
 .right {
-    flex: 2;
-    padding: 60px 40px;
+    width: 70%;
+    background-color: #FFFEFE;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 40px;
+    line-height: 1.4;
 }
-
 .right h2 {
-    color: #60AF6C;
-    font-size: 28px;
-    font-weight: bold;
+    font-size: 32px;
+    color: #8CC484;
+    font-weight: 700;
     margin-bottom: 10px;
 }
-
 .right p {
-    color: #666;
+    font-size: 16px;
+    color: #888;
     margin-bottom: 30px;
 }
-
 .form-group {
+    display: flex;
+    align-items: center;
     width: 100%;
     max-width: 500px;
+    background-color: #D9D9D9;
     margin-bottom: 20px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 15px 20px 15px 50px;
-    font-size: 16px;
-    border: none;
-    background-color: #ddd;
+    padding: 15px 20px;
     border-radius: 5px;
-    position: relative;
 }
-
-.form-group {
-    position: relative;
-}
-
 .form-group i {
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    color: #666;
+    margin-right: 15px;
+    color: #555;
+    font-size: 18px;
 }
-
-.btn-cadastrar {
-    margin-top: 20px;
-    padding: 12px 40px;
-    background-color: #A0D6A3;
-    color: white;
-    font-weight: bold;
+.form-group input {
     border: none;
-    border-radius: 25px;
-    cursor: pointer;
+    outline: none;
+    background: transparent;
+    width: 100%;
     font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+}
+.right button {
+    background-color: #8CC484;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFFEFE;
+    cursor: pointer;
+    transition: 0.5s;
 }
 
-.btn-cadastrar:hover {
-    background-color: #60AF6C;
+.right button:hover {
+    background-color: #32532e;
 }

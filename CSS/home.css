@@ -24,7 +24,7 @@ body, html {
 }
 
 .left {
-    flex: 1.2; 
+    flex: 1.2; /* aumenta parte verde do fundo */
     background-color: #8CC484;
     display: flex;
     flex-direction: column;
@@ -77,10 +77,10 @@ button:hover {
 
 button a {
     font-size: 20px;
-    color: white;
+    color: #FFFEFE;
 }
 
 p {
     font-size: 28px;
-    line-height: 1.4; 
+    line-height: 1.4; /* altura entre as linhas */
 }
