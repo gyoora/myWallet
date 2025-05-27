@@ -6,5 +6,9 @@
         {
             $this->db = Conexao::getInstancia();
         }
+
+        public function telaCadastro() {
+            require_once "Views/cadastro.php";
+        }
     }
 ?>

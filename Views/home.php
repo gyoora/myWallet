@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poltawski+Nowy:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
 </head>
 <body>
   <div class="container">
@@ -23,7 +24,7 @@
         relatórios em PDF para <strong>manter tudo sob controle.</strong>
       </p>
       <br>
-      <button>Comece agora mesmo!</button>
+      <button><a href="cadastro">Comece agora mesmo!</a></button>
     </div>
     <div class="right">
       <img src="img/dim-moedinha.png" alt="dinheiro e moeda">
