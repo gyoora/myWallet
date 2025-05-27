@@ -1,0 +1,82 @@
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Poppins', sans-serif;
+}
+
+.title {
+font-family: "Poltawski Nowy", serif;
+font-weight: bold; 
+font-size: 152px;
+}
+
+body, html {
+margin: 0;
+padding: 0;
+height: 100%;
+}
+
+.container {
+display: flex;
+height: 100vh;
+}
+
+.left {
+flex: 1.2; /* aumenta parte verde do fundo */
+background-color: #8CC484;
+display: flex;
+flex-direction: column;
+justify-content: center;
+padding: 150px;
+color: #FFFEFE;
+border: none;
+}
+
+.right {
+position: relative;
+overflow: visible;
+flex: 0.8;
+background-color: #FFFEFE;
+}
+
+.right img {
+position: absolute;
+right: 0;
+top: 10%;
+width: 900px;
+height: auto;
+}
+
+h2 {
+font-size: 38px;
+color: #FFFEFE;
+}
+
+strong {
+color: #4E8148; 
+font-weight: 600;
+}
+
+button {
+margin-top: 20px;
+background-color: #4E8148; 
+color: white;
+font-weight: 600;
+padding: 6px 24px;
+border: none;
+border-radius: 25px;
+font-size: 20px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+max-width: 310px;
+}
+
+button:hover {
+background-color: #32532e;
+}
+
+p {
+font-size: 28px;
+line-height: 1.4; /* altura entre as linhas */
+}
