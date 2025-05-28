@@ -25,7 +25,13 @@
                 }
 
                 if($valido) {
+                    $usuarioDAO = new UsuariosDAO($this->db);
                     
+                    $usuario = new Usuarios(0, $_POST['nome'], $_POST['email'], $_POST['senha']);
+
+                    $usuarioDAO->cadastrar($usuario);
+
+                    header("Location: login");
                 }
             }
         }

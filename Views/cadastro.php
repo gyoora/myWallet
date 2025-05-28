@@ -19,21 +19,23 @@
         <img src="img/dim-feliz.png" alt="Dinheirinho feliz">
     </div>
     <div class="right">
-        <h2>Crie sua conta</h2>
-        <p>Preencha seus dados</p>
-        <div class="form-group">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Nome" name="nome">
-        </div>
-        <div class="form-group">
-            <i class="fas fa-envelope"></i>
-            <input type="email" placeholder="E-mail" name="email">
-        </div>
-        <div class="form-group">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Senha" name="senha">
-        </div>
-        <button>CADASTRAR</button>
+        <form method="POST" action="cadastrar">
+            <h2>Crie sua conta</h2>
+            <p>Preencha seus dados</p>
+            <div class="form-group">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Nome" name="nome">
+            </div>
+            <div class="form-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" placeholder="E-mail" name="email">
+            </div>
+            <div class="form-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Senha" name="senha">
+            </div>
+            <button type="submit">CADASTRAR</button>
+        </form>
     </div>
     <script src="https://kit.fontawesome.com/8ec4f5570d.js" crossorigin="anonymous"></script>
 </body>
