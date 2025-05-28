@@ -29,8 +29,8 @@
 	}//fim da classe
 	$route = new Rotas();
 	$route->get("/", [HomeController::class, "home"]);
-	$route->get("/cadastro", [MyWalletController::class, "telaCadastro"]);
-	$route->post("/cadastro", [MyWalletController::class, "cadastrar"]);
+	$route->get("/cadastro", [MyWalletController::class, "cadastrar"]);
+	$route->post("/cadastrar", [MyWalletController::class, "cadastrar"]);
 	$route->get("/login", [MyWalletController::class, "telaLogin"]);
 
 ?>
