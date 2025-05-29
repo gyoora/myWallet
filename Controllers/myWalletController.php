@@ -46,9 +46,10 @@
                 if($valido) {
                     $usuarioDAO = new UsuariosDAO($this->db);
                     $usuarioDAO->cadastrar($usuario);
+
                     require_once "Views/login.php"; 
                     header("Location: login");
-                }
+                }  
 
                 require_once "Views/cadastro.php";
             } else {
@@ -84,13 +85,22 @@
                     if ($login) {
                         session_start();
                         $_SESSION["usuario"] = $login;
+
+                        $ret = $usuarioDAO->dadosUsuario($login->id);
+
+                        if($ret) {
+                            $_SESSION['id'] = $ret['id'];
+                            $_SESSION['nome'] = $ret['nome'];
+                            $_SESSION['email'] = $ret['email'];
+                        }
+
+                        require_once "Views/dashboard.php";
                         header("Location: dashboard");
                         exit;
                     } else {
                         $msg[2] = "Email ou senha incorretos. Verifique os dados inseridos.";
                     }
                 }
-
                 require_once "Views/login.php";
             } else {
                 require_once "Views/login.php";
