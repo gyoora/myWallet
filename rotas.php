@@ -31,6 +31,8 @@
 	$route->get("/", [HomeController::class, "home"]);
 	$route->get("/cadastro", [MyWalletController::class, "cadastrar"]);
 	$route->post("/cadastrar", [MyWalletController::class, "cadastrar"]);
-	$route->get("/login", [MyWalletController::class, "telaLogin"]);
-
+	$route->get("/login", [MyWalletController::class, "login"]);
+	$route->post("/loginAction", [MyWalletController::class, "login"]);
+	$route->get("/dashboard", [MyWalletController::class, "dashboard"]);
+	$route->post("/dashboard", [MyWalletController::class, "dashboard"]);
 ?>

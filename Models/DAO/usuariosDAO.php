@@ -32,5 +32,21 @@
                 die();
             }
         }
+
+        public function login(Usuarios $usuario) {
+            $sql = "SELECT * FROM usuarios WHERE email = ? AND senha = ?";
+
+            try {
+                $stm = $this->db->prepare($sql);
+                $stm->bindValue(1, $usuario->getEmail(), PDO::PARAM_STR);
+                $stm->bindValue(2, $usuario->getSenha(), PDO::PARAM_STR);
+                $stm->execute();
+                return $stm->fetch(PDO::FETCH_OBJ);
+            } catch (PDOException $e) {
+                echo "Erro ao buscar usuário." . $e->getMessage();
+                $this->db = null;
+                die();
+            }
+        }
     }
 ?>
