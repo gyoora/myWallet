@@ -110,5 +110,14 @@
         public function dashboard() {
             require_once "Views/dashboard.php";
         }
+
+        public function sair() {
+            session_start();
+            session_unset();
+            session_destroy();  
+            header("Location: /myWallet");
+            exit();
+        }
+
     }
 ?>

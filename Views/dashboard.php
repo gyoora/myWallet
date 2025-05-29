@@ -1,5 +1,7 @@
 <?php
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
     if (!isset($_SESSION['usuario'])) {
     header("Location: login");
@@ -21,7 +23,7 @@
 <body>
     <header>
         <h1>MyWallet</h1>
-        <span>Olá, <strong><?= htmlspecialchars($nome) ?></strong> | <a href="#" style="color: white; text-decoration: none;">SAIR</a></span>
+        <span>Olá, <strong><?= htmlspecialchars($nome) ?></strong> | <button id="btn-sair">SAIR</button>
     </header>
     
     <div class="content">
@@ -107,6 +109,8 @@
             <button class="btn add">+ NOVA TRANSAÇÃO</button>
         </div>
     </div>
+    <script src="JS/dashboard.js"></script>
     <script src="https://kit.fontawesome.com/8ec4f5570d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

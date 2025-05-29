@@ -196,3 +196,16 @@ tr:last-child td {
 .btn.add:hover {
     background-color: #679c5e;
 }
+
+#btn-sair {
+    background: none; 
+    border: none; 
+    color: white; 
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.swal2-icon.swal2-warning {
+    color: #4B9ED6;
+    border-color: #4B9ED6;
+}
