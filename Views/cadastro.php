@@ -31,12 +31,17 @@
                 <i class="fas fa-envelope"></i>
                 <input type="email" placeholder="E-mail" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
             </div>
-            <div class="aviso"><?php echo $msg[1]; ?></div>
+            <div class="aviso">
+                <?php 
+                    echo $msg[1];
+                    echo $msg[2]; 
+                ?>
+            </div>
             <div class="form-group">
                 <i class="fas fa-lock"></i>
                 <input type="password" placeholder="Senha" name="senha">
             </div>
-            <div class="aviso"><?php echo $msg[2]; ?></div>
+            <div class="aviso"><?php echo $msg[3]; ?></div>
             <input type="submit" value="CADASTRAR" class="button">
     </div>
     <script src="https://kit.fontawesome.com/8ec4f5570d.js" crossorigin="anonymous"></script>

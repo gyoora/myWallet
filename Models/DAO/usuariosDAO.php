@@ -18,5 +18,19 @@
                 die();
             }
         }
+        public function emailCadastrado(Usuarios $email) {
+            $sql = "SELECT COUNT(*) FROM usuarios WHERE email = ?";
+
+            try {
+                $stm = $this->db->prepare($sql);
+                $stm->bindValue(1, $email->getEmail(), PDO::PARAM_STR);
+                $stm->execute();
+                return $stm->fetchColumn() > 0;
+            } catch (PDOException $e) {
+                echo "Erro ao buscar email." . $e->getMessage();
+                $this->db = null;
+                die();
+            }
+        }
     }
 ?>
