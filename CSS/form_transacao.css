@@ -1,0 +1,128 @@
+* { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none;}
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f3f3f3;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background-color: #8CC484;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  color: #f3f3f3;
+}
+header h1 {
+  font-family: 'Poltawski Nowy', serif;
+  font-size: 28px;
+}
+header span { font-size: 16px; }
+header strong { font-weight: 700; }
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  flex-direction: column;
+}
+.form-box {
+  background-color: white;
+  padding: 40px;
+  border-radius: 35px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 30px;
+}
+.form-box h2 {
+  font-family: 'Poltawski Nowy', serif;
+  font-size: 24px;
+  color: #8BC484;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.form-group { margin-bottom: 20px; }
+.form-inline {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.form-inline label {
+  margin: 0;
+  color: #626161;
+}
+.radio-label {
+  font-weight: 400;
+  color: #626161;
+}
+input[type="radio"] {
+  accent-color: #888;
+}
+label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+  color: #626161;
+}
+input[type="text"], input[type="number"], input[type="date"] {
+  width: 100%;
+  padding: 12px 15px;
+  background-color: #d9d9d9;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+}
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+.actions button {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+  color: #f3f3f3;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.actions .save {
+  background-color: #8CC484;
+}
+.actions .save:hover {
+  background-color: #32532e;
+}
+.actions .cancel {
+  background-color: #f15f5f;
+}
+.actions .cancel:hover {
+  background-color: #d84c4c;
+}
+.back button {
+  background-color: #777;
+  padding: 10px 40px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.back button:hover {
+  background-color: #555;
+}
+::placeholder {
+  font-family: 'Poppins', sans-serif;
+}
+
+button a {
+  color: #f3f3f3;
+  font-weight: 600;
+  font-size: 14px;
+}

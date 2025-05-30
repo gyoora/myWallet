@@ -111,6 +111,10 @@
             require_once "Views/dashboard.php";
         }
 
+        public function addTransacao() {
+            require_once "Views/form_transacao.php";
+        }
+
         public function sair() {
             session_start();
             session_unset();

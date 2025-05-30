@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
 }
 
 body {
@@ -208,4 +209,9 @@ tr:last-child td {
 .swal2-icon.swal2-warning {
     color: #4B9ED6;
     border-color: #4B9ED6;
+}
+
+button a {
+    color: white; 
+    font-weight: 600;
 }

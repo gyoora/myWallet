@@ -106,7 +106,7 @@
         
         <div class="buttons">
             <button class="btn pdf">GERAR PDF</button>
-            <button class="btn add">+ NOVA TRANSAÇÃO</button>
+            <button class="btn add"><a href="adicionar-transacao">+ NOVA TRANSAÇÃO</a></button>
         </div>
     </div>
     <script src="JS/dashboard.js"></script>
