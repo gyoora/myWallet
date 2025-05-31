@@ -115,6 +115,11 @@
             require_once "Views/form_transacao.php";
         }
 
+        public function mostrarTipos() {
+            $tipoDAO = new Tipo_transacaoDAO();
+            $ret = $tipoDAO->mostrarTipos();
+        }
+
         public function sair() {
             session_start();
             session_unset();
