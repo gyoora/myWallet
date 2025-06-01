@@ -30,19 +30,12 @@
             <div class="summary-left">
                 <h2>Resumo Financeiro - Maio</h2>
                 <div class="filters">
-                    <select name="month">
-                        <option>JANEIRO</option>
-                        <option>FEVEREIRO</option>
-                        <option>MARÇO</option>
-                        <option>ABRIL</option>
-                        <option>MAIO</option>
-                        <option>JUNHO</option>
-                        <option>JULHO</option>
-                        <option>AGOSTO</option>
-                        <option>SETEMBRO</option>
-                        <option>OUTUBRO</option>
-                        <option>NOVEMBRO</option>
-                        <option>DEZEMBRO</option>
+                    <select name="month" id="mes">
+                        <?php
+                            foreach($ret as $dado) {
+                                echo "<option>{$dado->mes}</option>";
+                            }
+                        ?>
                     </select>
                     <select name="year">
                         <option>2025</option>
@@ -80,7 +73,27 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <?php
+                    if(!empty($dadostransacao)) {
+                        foreach($dadostransacao as $dado) {
+                            echo "<tr>
+                                <td>{$dado->tipo}</td>
+                                <td>{$dado->data}</td>
+                                <td>{$dado->descricao}</td>
+                                <td>R$ {$dado->valor}</td>
+                                <td>
+                                    <i class='fas fa-trash'></i>
+                                    <i class='fas fa-pen'></i>
+                                </td>
+                            </tr>";
+                        }
+                    } else {
+                        echo "<tr>
+                            <td>Sem transações inseridas.</td>
+                        <tr>";
+                    }
+                ?>
+                <!-- <tr>
                     <td class="type-receita">Receita</td>
                     <td>16/05/2025</td>
                     <td>Presente de aniversário</td>
@@ -99,7 +112,7 @@
                         <i class="fas fa-trash"></i>
                         <i class="fas fa-pen"></i>
                     </td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
         

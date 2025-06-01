@@ -88,7 +88,6 @@
                             $_SESSION['usuario'] = $ret;
                         }
 
-                        require_once "Views/dashboard.php";
                         header("Location: dashboard");
                         exit;
                     } else {
@@ -103,6 +102,10 @@
 
         public function dashboard() {
             session_start();
+            $mesesDAO = new MesesDAO($this->db);
+            $ret = $mesesDAO->mostrarMeses();
+            $dashboardDAO = new DashboardDAO($this->db);
+            $dadostransacao = $dashboardDAO->mostrarTransaçoes($_SESSION['usuario']->id);
             require_once "Views/dashboard.php";
         }
 

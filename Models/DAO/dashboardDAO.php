@@ -21,5 +21,18 @@
                 die();
             }
         }
+
+        public function mostrarTransaçoes(int $usuarioId) {
+            $sql = "SELECT t.id, tt.tipo, t.data, t.descricao, t.valor FROM transacoes t INNER JOIN tipo_transacao tt ON t.tipo = tt.id WHERE t.id_usuario = ?";
+
+            try {
+                $stm = $this->db->prepare($sql);
+                $stm->bindValue(1, $usuarioId, PDO::PARAM_INT);
+                $stm->execute();
+                return $stm->fetchAll(PDO::FETCH_OBJ);
+            } catch (PDOException $e) {
+                echo "Erro ao buscar transações" . $e->getMessage();
+            }
+        }
     }
 ?>
