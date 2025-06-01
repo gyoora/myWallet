@@ -48,14 +48,14 @@
                     die();
                 }
             }
-            public function dadosUsuario($id) {
+            public function dadosUsuario(int $id) {
                 $sql = "SELECT * FROM usuarios WHERE id = ?";
 
                 try {
                     $stm = $this->db->prepare($sql);
                     $stm->bindValue(1, $id, PDO::PARAM_INT);
                     $stm->execute();
-                    return $stm->fetch(PDO::FETCH_ASSOC);
+                    return $stm->fetch(PDO::FETCH_OBJ);
                 } catch (PDOException $e) {
                     echo "Erro ao buscar usuário." . $e->getMessage();
                     $this->db = null;

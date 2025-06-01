@@ -32,7 +32,7 @@
 	$route->get("/cadastro", [MyWalletController::class, "cadastrar"]);
 	$route->post("/cadastrar", [MyWalletController::class, "cadastrar"]);
 	$route->get("/login", [MyWalletController::class, "login"]);
-	$route->post("/loginAction", [MyWalletController::class, "login"]);
+	$route->post("/login", [MyWalletController::class, "login"]);
 	$route->get("/dashboard", [MyWalletController::class, "dashboard"]);
 	$route->post("/dashboard", [MyWalletController::class, "dashboard"]);
 	$route->get("/adicionar-transacao", [MyWalletController::class, "addTransacao"]);

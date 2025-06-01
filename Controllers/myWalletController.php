@@ -35,7 +35,7 @@
                     $msg[2] = "Email já cadastrado.";
                     $valido = false;
                 } else {
-                    $msg[2] = "Email já cadastrado.";
+                    $msg[2] = "";
                 }                
                 if(empty($_POST["senha"]) || $_POST["senha"] == 0) {
                     $msg[3] = "A senha é obrigatória.";
@@ -50,11 +50,8 @@
                     require_once "Views/login.php"; 
                     header("Location: login");
                 }  
-
-                require_once "Views/cadastro.php";
-            } else {
-                require_once "Views/cadastro.php";
             }
+            require_once "Views/cadastro.php";
         }
 
         public function login() {
@@ -84,14 +81,11 @@
 
                     if ($login) {
                         session_start();
-                        $_SESSION["usuario"] = $login;
 
                         $ret = $usuarioDAO->dadosUsuario($login->id);
 
                         if($ret) {
-                            $_SESSION['id'] = $ret['id'];
-                            $_SESSION['nome'] = $ret['nome'];
-                            $_SESSION['email'] = $ret['email'];
+                            $_SESSION['usuario'] = $ret;
                         }
 
                         require_once "Views/dashboard.php";
@@ -108,20 +102,54 @@
         }
 
         public function dashboard() {
+            session_start();
             require_once "Views/dashboard.php";
         }
 
         public function addTransacao() {
+            session_start();
+            $tipoDAO = new Tipo_transacaoDAO($this->db);
+            $ret = $tipoDAO->mostrarTipos();
+            $msg = ["", "", "", ""];
+            if($_SERVER["REQUEST_METHOD"] == "POST") {
+                $transacao = new Transacao(0, $_POST["tipo"] ?? 0, $_POST["data"], $_POST["descricao"], $_POST["valor"] == '' ? 0 : $_POST["valor"], $_SESSION['usuario']->id);
+                $valido = true;
+                if(empty($transacao->id_tipo) || $transacao->id_tipo <= 0) {
+                    $msg[0] = "Selecione o tipo da transação.";
+                    $valido = false;
+                } else {
+                    $msg[0] = "";
+                }
+
+                if(empty($transacao->data)) {
+                    $msg[1] = "Insira a data em que foi feita a transação.";
+                    $valido = false;
+                } else {
+                    $msg[1] = "";
+                }
+                if(empty($transacao->descricao)) {
+                    $msg[2] = "Insira a descrição.";
+                    $valido = false;
+                } else {
+                    $msg[2] = "";
+                }
+                if(empty($transacao->valor) || $transacao->valor <= 0) {
+                    $msg[3] = "Insira o valor da transação. Ele deve ser maior que R$ 0,00.";
+                    $valido = false;
+                } else {
+                    $msg[3] = "";
+                }
+
+                if($valido) {
+                    $dashboardDAO = new DashboardDAO($this->db);
+                    $dashboardDAO->addTransacao($transacao);
+                    header("Location: dashboard");
+                }
+            }
             require_once "Views/form_transacao.php";
         }
 
-        public function mostrarTipos() {
-            $tipoDAO = new Tipo_transacaoDAO();
-            $ret = $tipoDAO->mostrarTipos();
-        }
-
         public function sair() {
-            session_start();
             session_unset();
             session_destroy();  
             header("Location: /myWallet");

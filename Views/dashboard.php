@@ -4,11 +4,10 @@
     }
 
     if (!isset($_SESSION['usuario'])) {
-    header("Location: login");
-    exit;
+        header("Location: login");
+        exit;
     }
-
-    $nome = $_SESSION['nome'];
+    $nome = $_SESSION['usuario']->nome;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

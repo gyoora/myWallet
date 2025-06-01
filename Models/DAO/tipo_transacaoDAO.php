@@ -8,7 +8,7 @@
             try {
                 $stm = $this->db->prepare($sql);
                 $stm->execute();
-                return $stm->fetchAll(PDO::FETCH_COLUMN);
+                return $stm->fetchAll(PDO::FETCH_OBJ);
             } catch (PDOException $e) {
                 echo "Erro ao buscar tipos" . $e->getMessage();
             }

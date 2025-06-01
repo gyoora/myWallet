@@ -13,7 +13,7 @@
   <div class="container">
     <h2>Entre na sua conta</h2>
     <p class="description">Preencha seus dados</p>
-    <form action="loginAction" method="post">
+    <form action="login" method="post">
         <div class="form-group">
             <i class="fas fa-envelope"></i>
             <input type="email" placeholder="E-mail" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
