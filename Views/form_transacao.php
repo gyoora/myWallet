@@ -44,17 +44,17 @@
                 <div class="aviso"><?php echo $msg[0]; ?></div>
                 <div class="form-group">
                     <label for="descricao">Descrição:</label>
-                    <input type="text" id="descricao" name="descricao" placeholder="Descrição da sua transação">
+                    <input type="text" id="descricao" name="descricao" placeholder="Descrição da sua transação" value="<?= htmlspecialchars($_POST['descricao'] ?? '') ?>">
                 </div>
                 <div class="aviso"><?php echo $msg[2]; ?></div>
                 <div class="form-group">
                     <label for="valor">Valor:</label>
-                    <input type="number" id="valor" name="valor" step='0.01' min='0' placeholder="R$">
+                    <input type="number" id="valor" name="valor" step='0.01' min='0' placeholder="R$" value="<?= htmlspecialchars($_POST['valor'] ?? '') ?>">
                 </div>
                 <div class="aviso"><?php echo $msg[3]; ?></div>
                 <div class="form-group">
                     <label for="data">Data:</label>
-                    <input type="date" id="data" name="data">
+                    <input type="date" id="data" name="data" value="<?= htmlspecialchars($_POST['data'] ?? '') ?>">
                 </div>
                 <div class="aviso"><?php echo $msg[1]; ?></div>
                 <div class="actions">

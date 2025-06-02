@@ -140,3 +140,10 @@ button a {
   margin-bottom: 12px;
   color: #a6172d;
 }
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+

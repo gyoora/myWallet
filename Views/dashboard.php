@@ -77,11 +77,11 @@
                     if(!empty($dadostransacao)) {
                         foreach($dadostransacao as $dado) {
                             echo "<tr>
-                                <td>{$dado->tipo}</td>
-                                <td>{$dado->data}</td>
+                                <td class='tipos'>{$dado->tipo}</td>
+                                <td>" . date('d/m/Y', strtotime($dado->data)) . "</td>
                                 <td>{$dado->descricao}</td>
-                                <td>R$ {$dado->valor}</td>
-                                <td>
+                                <td>R$ " . number_format($dado->valor, 2, ',', '.') . "</td>
+                                <td class='actions'>
                                     <i class='fas fa-trash'></i>
                                     <i class='fas fa-pen'></i>
                                 </td>
@@ -93,26 +93,6 @@
                         <tr>";
                     }
                 ?>
-                <!-- <tr>
-                    <td class="type-receita">Receita</td>
-                    <td>16/05/2025</td>
-                    <td>Presente de aniversário</td>
-                    <td>R$400,00</td>
-                    <td class="actions">
-                        <i class="fas fa-trash"></i>
-                        <i class="fas fa-pen"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="type-despesa">Despesa</td>
-                    <td>16/05/2025</td>
-                    <td>Bichinho de pelúcia fofo</td>
-                    <td>R$112,00</td>
-                    <td class="actions">
-                        <i class="fas fa-trash"></i>
-                        <i class="fas fa-pen"></i>
-                    </td>
-                </tr> -->
             </tbody>
         </table>
         

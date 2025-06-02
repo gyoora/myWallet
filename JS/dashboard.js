@@ -16,3 +16,16 @@ document.getElementById("btn-sair").addEventListener("click", function(e) {
     }
   });
 });
+
+const tipos = document.querySelectorAll('.tipos');
+
+tipos.forEach(td => {
+  const tipo = td.textContent.trim();
+  
+  if(tipo === 'Despesa') {
+    td.classList.add('redColor');
+  } else if(tipo === 'Receita') {
+    td.classList.add('greenColor');
+  }
+});
+

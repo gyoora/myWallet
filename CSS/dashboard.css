@@ -12,7 +12,7 @@ body {
 }
 
 header {
-    background-color: #97CD8D;
+    background-color: #8CC484;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -77,8 +77,8 @@ header strong {
 }
 
 .stat.green {
-    color: #97CD8D;
-    border-color: #97CD8D;
+    color: #8CC484;
+    border-color: #8CC484;
 }
 
 .stat.red {
@@ -113,7 +113,7 @@ select {
 h3 {
     font-family: 'Poltawski Nowy', serif;
     font-size: 24px;
-    color: #97CD8D;
+    color: #8CC484;
     margin-bottom: 20px;
 }
 
@@ -143,7 +143,7 @@ tr:last-child td {
 }
 
 .type-receita {
-    color: #97CD8D;
+    color: #8CC484;
     font-weight: 600;
 }
 
@@ -155,7 +155,7 @@ tr:last-child td {
 .actions i {
     margin-right: 10px;
     cursor: pointer;
-    transition: color 0.2s ease;
+    transition: color 0.5s ease;
 }
 
 .actions i.fa-trash:hover {
@@ -190,7 +190,7 @@ tr:last-child td {
 }
 
 .btn.add {
-    background-color: #97CD8D;
+    background-color: #8CC484;
     color: white;
 }
 
@@ -215,3 +215,14 @@ button a {
     color: white; 
     font-weight: 600;
 }
+
+.redColor {
+    color: #F15F5F; 
+    font-weight: bold;
+}
+
+.greenColor {
+    color: #8CC484; 
+    font-weight: bold;
+}
+  
