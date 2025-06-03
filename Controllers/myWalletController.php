@@ -152,6 +152,12 @@
             require_once "Views/form_transacao.php";
         }
 
+        public function deletarTransacao() {
+            $dashboardDAO = new DashboardDAO($this->db);
+            $dashboardDAO->deletarTransacao();
+            header("Location: dashboard");
+        }
+
         public function sair() {
             session_unset();
             session_destroy();  

@@ -14,7 +14,7 @@
                 $stm->bindValue(5, $transacao->getIdUsuario(), PDO::PARAM_INT);
                 $stm->execute();
 
-                return $stm->fetchAll(PDO::FETCH_OBJ);
+                return $stm->fetchAll(PDO::FETCH_OBJ); 
             } catch(PDOException $e) {
                 echo "Erro ao inserir transação." . $e->getMessage();
                 $this->db = null;
@@ -32,6 +32,21 @@
                 return $stm->fetchAll(PDO::FETCH_OBJ);
             } catch (PDOException $e) {
                 echo "Erro ao buscar transações" . $e->getMessage();
+            }
+        }
+
+        public function deletarTransacao(int $idTransacao) {
+            session_start();
+            $sql = "DELETE FROM transaçoes WHERE id = ?";
+
+            try {
+                $stm = $this->db->prepare($sql);
+                $stm->bindValue(1, $idTransacao, PDO::PARAM_INT);
+                $stm->execute();
+                return true;
+            } catch (PDOException $e) {
+                echo "Erro ao deletar transações" . $e->getMessage();
+                return false;
             }
         }
     }

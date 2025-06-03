@@ -82,8 +82,8 @@
                                 <td>{$dado->descricao}</td>
                                 <td>R$ " . number_format($dado->valor, 2, ',', '.') . "</td>
                                 <td class='actions'>
-                                    <i class='fas fa-trash'></i>
-                                    <i class='fas fa-pen'></i>
+                                    <a href=''><i class='fas fa-trash'></i></a>
+                                    <a><i class='fas fa-pen'></i></a>
                                 </td>
                             </tr>";
                         }
