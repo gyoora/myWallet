@@ -36,7 +36,6 @@
         }
 
         public function deletarTransacao(int $idTransacao) {
-            session_start();
             $sql = "DELETE FROM transacoes WHERE id = ?";
 
             try {
@@ -45,10 +44,29 @@
                 $stm->execute();
                 return true;
             } catch (PDOException $e) {
-                echo "Erro ao deletar transações: " . $e->getMessage();
+                echo "Erro ao deletar transação: " . $e->getMessage();
+                $this->db = null;
                 return false;
             }
         }
 
+        public function alterarTransacao(Transacao $transacao) {
+            $sql = "UPDATE transacoes SET tipo = ?, data = ?, descricao = ?, valor = ? WHERE id = ?";
+
+            try {
+                $stm = $this->db->prepare($sql);   
+                $stm->bindValue(1, $transacao->getIdTipo(), PDO::PARAM_INT); 
+                $stm->bindValue(2, $transacao->getData(), PDO::PARAM_STR);
+                $stm->bindValue(3, $transacao->getDescricao(),PDO::PARAM_STR);
+                $stm->bindValue(4, $transacao->getValor(), PDO::PARAM_STR);
+                $stm->execute();
+
+                return $stm->fetchAll(PDO::FETCH_OBJ); 
+            } catch(PDOException $e) {
+                echo "Erro ao editar transação: " . $e->getMessage();
+                $this->db = null;
+                die();
+            }
+        }
     }
 ?>

@@ -163,15 +163,58 @@
             if (isset($_GET['id'])) {
                 $idTransacao = intval($_GET['id']);
                 $dashboardDAO = new DashboardDAO($this->db);
-                $resultado = $dashboardDAO->deletarTransacao($idTransacao);
+                $deletar = $dashboardDAO->deletarTransacao($idTransacao);
 
-                if ($resultado) {
+                if ($deletar) {
                     header("Location: dashboard");
                     exit;
                 } else {
                     echo "Erro ao deletar transação.";
                 }
             }
+        }
+
+        public function alterarTransacao() {
+            session_start();
+            $tipoDAO = new Tipo_transacaoDAO($this->db);
+            $ret = $tipoDAO->mostrarTipos();
+
+            if($_SERVER["REQUEST_METHOD"] == "POST") {
+                $transacao = new Transacao(0, $_POST["tipo"] ?? 0, $_POST["data"], $_POST["descricao"], $_POST["valor"] == '' ? 0 : $_POST["valor"], $_SESSION['usuario']->id);
+                $valido = true;
+                if(empty($transacao->id_tipo) || $transacao->id_tipo <= 0) {
+                    $msg[0] = "Selecione o tipo da transação.";
+                    $valido = false;
+                } else {
+                    $msg[0] = "";
+                }
+
+                if(empty($transacao->data)) {
+                    $msg[1] = "Insira a data em que foi feita a transação.";
+                    $valido = false;
+                } else {
+                    $msg[1] = "";
+                }
+                if(empty($transacao->descricao)) {
+                    $msg[2] = "Insira a descrição.";
+                    $valido = false;
+                } else {
+                    $msg[2] = "";
+                }
+                if(empty($transacao->valor) || $transacao->valor <= 0) {
+                    $msg[3] = "Insira o valor da transação. Ele deve ser maior que R$ 0,00.";
+                    $valido = false;
+                } else {
+                    $msg[3] = "";
+                }
+
+                if($valido) {
+                    $dashboardDAO = new DashboardDAO($this->db);
+                    $dashboardDAO->alterarTransacao($transacao);
+                    header("Location: dashboard");
+                }
+            }
+            require_once "Views/edit_transacao.php";
         }
 
         public function sair() {

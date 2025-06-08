@@ -38,6 +38,8 @@
 	$route->get("/adicionar-transacao", [MyWalletController::class, "addTransacao"]);
 	$route->post("/adicionar-transacao", [MyWalletController::class, "addTransacao"]);
 	$route->get("/deletar-transacao", [MyWalletController::class, "deletarTransacao"]);
+	$route->get("/editar-transacao", [MyWalletController::class, "alterarTransacao"]);
+	$route->post("/editar-transacao", [MyWalletController::class, "alterarTransacao"]);
 	$route->get("/sair", [MyWalletController::class, "sair"]);
 
 ?>
