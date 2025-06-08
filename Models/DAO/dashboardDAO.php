@@ -37,7 +37,7 @@
 
         public function deletarTransacao(int $idTransacao) {
             session_start();
-            $sql = "DELETE FROM transaçoes WHERE id = ?";
+            $sql = "DELETE FROM transacoes WHERE id = ?";
 
             try {
                 $stm = $this->db->prepare($sql);
@@ -45,9 +45,10 @@
                 $stm->execute();
                 return true;
             } catch (PDOException $e) {
-                echo "Erro ao deletar transações" . $e->getMessage();
+                echo "Erro ao deletar transações: " . $e->getMessage();
                 return false;
             }
         }
+
     }
 ?>

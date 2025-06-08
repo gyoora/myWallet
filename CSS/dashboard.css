@@ -33,7 +33,6 @@ header strong {
     font-weight: 700;
 }
 
-
 .content {
     padding: 40px 20px;
     max-width: 1400px;
@@ -141,6 +140,8 @@ th {
 tr:last-child td {
     border-bottom: none;
 }
+
+a { color: inherit; } 
 
 .type-receita {
     color: #8CC484;

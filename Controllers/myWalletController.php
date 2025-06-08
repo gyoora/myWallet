@@ -153,9 +153,25 @@
         }
 
         public function deletarTransacao() {
-            $dashboardDAO = new DashboardDAO($this->db);
-            $dashboardDAO->deletarTransacao();
-            header("Location: dashboard");
+            session_start();
+
+            if (!isset($_SESSION['usuario'])) {
+                header("Location: login");
+                exit;
+            }
+
+            if (isset($_GET['id'])) {
+                $idTransacao = intval($_GET['id']);
+                $dashboardDAO = new DashboardDAO($this->db);
+                $resultado = $dashboardDAO->deletarTransacao($idTransacao);
+
+                if ($resultado) {
+                    header("Location: dashboard");
+                    exit;
+                } else {
+                    echo "Erro ao deletar transação.";
+                }
+            }
         }
 
         public function sair() {
