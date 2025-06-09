@@ -59,6 +59,7 @@
                 $stm->bindValue(2, $transacao->getData(), PDO::PARAM_STR);
                 $stm->bindValue(3, $transacao->getDescricao(),PDO::PARAM_STR);
                 $stm->bindValue(4, $transacao->getValor(), PDO::PARAM_STR);
+                $stm->bindValue(5, $transacao->getId(), PDO::PARAM_INT);
                 $stm->execute();
 
                 return $stm->fetchAll(PDO::FETCH_OBJ); 
@@ -68,5 +69,20 @@
                 die();
             }
         }
+
+        // public function buscarIdTransacao(Transacao $idTransacao) {
+        //     $sql = "SELECT * FROM transacoes WHERE id = ?";
+        //     try {
+        //         $stm = $this->db->prepare($sql);
+        //         $stm->bindValue(1, $idTransacao->getId(), PDO::PARAM_INT);
+        //         $stm->execute();
+        //         $this->db = null;
+        //         return $stm->fetchAll(PDO::FETCH_OBJ);
+        //     } catch (PDOException $e) {
+        //         echo "Erro ao buscar Id". $e->getMessage();
+        //         $this->db = null;
+        //         die();
+        //     }
+        // }
     }
 ?>
