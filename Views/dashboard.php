@@ -83,7 +83,7 @@
                                 <td>R$ " . number_format($dado->valor, 2, ',', '.') . "</td>
                                 <td class='actions'>
                                     <a href='deletar-transacao?id={$dado->id}'><i class='fas fa-trash'></i></a>
-                                    <a href='editar-transacao'><i class='fas fa-pen'></i></a>
+                                    <a href='editar-transacao?id={$dado->id}'><i class='fas fa-pen'></i></a>
                                 </td>
                             </tr>";
                         }

@@ -210,7 +210,8 @@
 
                 if($valido) {
                     $dashboardDAO = new DashboardDAO($this->db);
-                    $dashboardDAO->alterarTransacao($transacao);
+                    $idTransacao = intval($_GET['id']);
+                    $dashboardDAO->alterarTransacao($transacao, $idTransacao);
                     header("Location: dashboard");
                 }
             }

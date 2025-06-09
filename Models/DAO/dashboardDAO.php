@@ -50,7 +50,7 @@
             }
         }
 
-        public function alterarTransacao(Transacao $transacao) {
+        public function alterarTransacao(Transacao $transacao, int $idTransacao) {
             $sql = "UPDATE transacoes SET tipo = ?, data = ?, descricao = ?, valor = ? WHERE id = ?";
 
             try {
@@ -59,7 +59,7 @@
                 $stm->bindValue(2, $transacao->getData(), PDO::PARAM_STR);
                 $stm->bindValue(3, $transacao->getDescricao(),PDO::PARAM_STR);
                 $stm->bindValue(4, $transacao->getValor(), PDO::PARAM_STR);
-                $stm->bindValue(5, $transacao->getId(), PDO::PARAM_INT);
+                $stm->bindValue(5, $idTransacao, PDO::PARAM_INT);
                 $stm->execute();
 
                 return $stm->fetchAll(PDO::FETCH_OBJ); 
