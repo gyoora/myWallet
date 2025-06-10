@@ -69,20 +69,5 @@
                 die();
             }
         }
-
-        // public function buscarIdTransacao(Transacao $idTransacao) {
-        //     $sql = "SELECT * FROM transacoes WHERE id = ?";
-        //     try {
-        //         $stm = $this->db->prepare($sql);
-        //         $stm->bindValue(1, $idTransacao->getId(), PDO::PARAM_INT);
-        //         $stm->execute();
-        //         $this->db = null;
-        //         return $stm->fetchAll(PDO::FETCH_OBJ);
-        //     } catch (PDOException $e) {
-        //         echo "Erro ao buscar Id". $e->getMessage();
-        //         $this->db = null;
-        //         die();
-        //     }
-        // }
     }
 ?>

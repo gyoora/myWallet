@@ -212,7 +212,7 @@
                 if($valido && $_SERVER['REQUEST_METHOD'] == "POST") {
                     $dashboardDAO = new DashboardDAO($this->db);
                     $idTransacao = intval($_GET['id']);
-                    $dashboardDAO->alterarTransacao($transacao, $idTransacao);
+                    $dashboardDAO->alterarTransacao($transacao);
                     header("Location: dashboard");
                 }
             }
