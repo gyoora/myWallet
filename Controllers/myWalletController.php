@@ -115,7 +115,8 @@
             $ret = $tipoDAO->mostrarTipos();
             $msg = ["", "", "", ""];
             if($_SERVER["REQUEST_METHOD"] == "POST") {
-                $transacao = new Transacao(0, $_POST["tipo"] ?? 0, $_POST["data"], $_POST["descricao"], $_POST["valor"] == '' ? 0 : $_POST["valor"], $_SESSION['usuario']->id);
+                $usuario = new Usuarios($_SESSION['usuario']->id);
+                $transacao = new Transacao(0, $_POST["tipo"] ?? 0, $_POST["data"], $_POST["descricao"], $_POST["valor"] == '' ? 0 : $_POST["valor"], $usuario);
                 $valido = true;
                 if(empty($transacao->id_tipo) || $transacao->id_tipo <= 0) {
                     $msg[0] = "Selecione o tipo da transação.";
@@ -162,8 +163,9 @@
 
             if (isset($_GET['id'])) {
                 $idTransacao = intval($_GET['id']);
+                $transacao = new Transacao($idTransacao);
                 $dashboardDAO = new DashboardDAO($this->db);
-                $deletar = $dashboardDAO->deletarTransacao($idTransacao);
+                $deletar = $dashboardDAO->deletarTransacao($transacao);
 
                 if ($deletar) {
                     header("Location: dashboard");
@@ -207,8 +209,7 @@
                 } else {
                     $msg[3] = "";
                 }
-
-                if($valido) {
+                if($valido && $_SERVER['REQUEST_METHOD'] == "POST") {
                     $dashboardDAO = new DashboardDAO($this->db);
                     $idTransacao = intval($_GET['id']);
                     $dashboardDAO->alterarTransacao($transacao, $idTransacao);

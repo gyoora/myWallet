@@ -7,7 +7,7 @@
             public string $data = "",
             public string $descricao = "",
             public float $valor = 0,
-            public int $id_usuario = 0
+            public Usuarios $usuario = new Usuarios()
         ){}
 
         public function getId() {
@@ -25,8 +25,8 @@
         public function getValor() {
             return $this->valor;
         }
-        public function getIdUsuario() {
-            return $this->id_usuario;
+        public function getUsuario() {
+            return $this->usuario;
         }
     }
 

@@ -27,7 +27,7 @@
   <main>
     <div class="form-box">
       <h2>Editar transação</h2>
-      <form action="editar-transacao" method="post">
+      <form action="editar-transacao" method="POST">
         <div class="form-inline">
           <label for="tipo">Tipo:</label>
           <?php

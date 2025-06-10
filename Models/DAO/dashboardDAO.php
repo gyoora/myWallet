@@ -11,7 +11,7 @@
                 $stm->bindValue(2, $transacao->getData(), PDO::PARAM_STR);
                 $stm->bindValue(3, $transacao->getDescricao(),PDO::PARAM_STR);
                 $stm->bindValue(4, $transacao->getValor(), PDO::PARAM_STR);
-                $stm->bindValue(5, $transacao->getIdUsuario(), PDO::PARAM_INT);
+                $stm->bindValue(5, $transacao->getUsuario()->getId(), PDO::PARAM_INT);
                 $stm->execute();
 
                 return $stm->fetchAll(PDO::FETCH_OBJ); 
@@ -35,12 +35,12 @@
             }
         }
 
-        public function deletarTransacao(int $idTransacao) {
+        public function deletarTransacao(Transacao $transacao) {
             $sql = "DELETE FROM transacoes WHERE id = ?";
 
             try {
                 $stm = $this->db->prepare($sql);
-                $stm->bindValue(1, $idTransacao, PDO::PARAM_INT);
+                $stm->bindValue(1, $transacao->getId(), PDO::PARAM_INT);
                 $stm->execute();
                 return true;
             } catch (PDOException $e) {
@@ -50,7 +50,7 @@
             }
         }
 
-        public function alterarTransacao(Transacao $transacao, int $idTransacao) {
+        public function alterarTransacao(Transacao $transacao) {
             $sql = "UPDATE transacoes SET tipo = ?, data = ?, descricao = ?, valor = ? WHERE id = ?";
 
             try {
@@ -59,7 +59,7 @@
                 $stm->bindValue(2, $transacao->getData(), PDO::PARAM_STR);
                 $stm->bindValue(3, $transacao->getDescricao(),PDO::PARAM_STR);
                 $stm->bindValue(4, $transacao->getValor(), PDO::PARAM_STR);
-                $stm->bindValue(5, $idTransacao, PDO::PARAM_INT);
+                $stm->bindValue(5, $transacao, PDO::PARAM_INT);
                 $stm->execute();
 
                 return $stm->fetchAll(PDO::FETCH_OBJ); 
