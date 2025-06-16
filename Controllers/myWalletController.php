@@ -102,8 +102,6 @@
 
         public function dashboard() {
             session_start();
-            $mesesDAO = new MesesDAO($this->db);
-            $ret = $mesesDAO->mostrarMeses();
             $dashboardDAO = new DashboardDAO($this->db);
             $dadostransacao = $dashboardDAO->mostrarTransaçoes($_SESSION['usuario']->id);
             require_once "Views/dashboard.php";
@@ -112,6 +110,7 @@
         public function addTransacao() {
             session_start();
             $tipoDAO = new Tipo_transacaoDAO($this->db);
+            $dashboardDAO = new DashboardDAO($this->db);
             $ret = $tipoDAO->mostrarTipos();
             $msg = ["", "", "", ""];
             if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -179,10 +178,12 @@
         public function alterarTransacao() {
             session_start();
             $tipoDAO = new Tipo_transacaoDAO($this->db);
+            $dashboardDAO = new DashboardDAO($this->db);
             $ret = $tipoDAO->mostrarTipos();
 
             if($_SERVER["REQUEST_METHOD"] == "POST") {
-                $transacao = new Transacao(0, $_POST["tipo"] ?? 0, $_POST["data"], $_POST["descricao"], $_POST["valor"] == '' ? 0 : $_POST["valor"], $_SESSION['usuario']->id);
+                $usuario = new Usuarios($_SESSION['usuario']->id);
+                $transacao = new Transacao($_POST["id"], $_POST["tipo"] ?? 0, $_POST["data"], $_POST["descricao"], $_POST["valor"] == '' ? 0 : $_POST["valor"], $usuario);
                 $valido = true;
                 if(empty($transacao->id_tipo) || $transacao->id_tipo <= 0) {
                     $msg[0] = "Selecione o tipo da transação.";
@@ -209,14 +210,21 @@
                 } else {
                     $msg[3] = "";
                 }
-                if($valido && $_SERVER['REQUEST_METHOD'] == "POST") {
+                if($valido) {
                     $dashboardDAO = new DashboardDAO($this->db);
-                    $idTransacao = intval($_GET['id']);
                     $dashboardDAO->alterarTransacao($transacao);
                     header("Location: dashboard");
                 }
+            } else if($_SERVER["REQUEST_METHOD"] == "GET") {
+                $formData = $dashboardDAO->buscarPorId($_GET["id"]);
+                $formData->data = date("Y-m-d", strtotime($formData->data));
             }
             require_once "Views/edit_transacao.php";
+        }
+
+        public function selecionarMes() {
+           $mes = $_GET['month'];
+
         }
 
         public function sair() {

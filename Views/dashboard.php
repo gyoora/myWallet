@@ -28,27 +28,30 @@
     <div class="content">
         <div class="summary-box">
             <div class="summary-left">
-                <h2>Resumo Financeiro - Maio</h2>
-                <div class="filters">
+                <h2>Resumo Financeiro - 
                     <select name="month" id="mes">
-                        <?php
-                            foreach($ret as $dado) {
-                                echo "<option>{$dado->mes}</option>";
-                            }
-                        ?>
+                        <option value="1">Janeiro</option>
+                        <option value="2">Fevereiro</option>
+                        <option value="3">Março</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Maio</option>
+                        <option value="6">Junho</option>
+                        <option value="7">Julho</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
                     </select>
-                    <select name="year">
-                        <option>2025</option>
-                    </select>
-                </div>
+                </h2>
                 <div class="summary-stats">
                     <div class="stat green">
                         <p>Receita mensal</p>
-                        <strong>+ R$400,00</strong>
+                        <strong><?php echo $receitaObj->total ?? 0; ?></strong>
                     </div>
                     <div class="stat red">
                         <p>Despesa mensal</p>
-                        <strong>- R$112,00</strong>
+                        <strong><?php $despesaObj->total ?? 0 ?></strong>
                     </div>
                     <div class="stat blue">
                         <p>Saldo Atual</p>
@@ -77,7 +80,7 @@
                     if(!empty($dadostransacao)) {
                         foreach($dadostransacao as $dado) {
                             echo "<tr>
-                                <td class='tipos'>{$dado->tipo}</td>
+                                <td class='tipos' name='tipo'>{$dado->tipo}</td>
                                 <td>" . date('d/m/Y', strtotime($dado->data)) . "</td>
                                 <td>{$dado->descricao}</td>
                                 <td>R$ " . number_format($dado->valor, 2, ',', '.') . "</td>

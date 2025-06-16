@@ -27,13 +27,15 @@
   <main>
     <div class="form-box">
       <h2>Editar transação</h2>
-      <form action="editar-transacao" method="POST">
+      <form action="editar-transacao" method="post">
+        <input type="hidden" id="id" name="id" value="<?= $formData->id ?? 0 ?>">
         <div class="form-inline">
           <label for="tipo">Tipo:</label>
           <?php
             foreach($ret as $dados) {
               $idRadio = 'tipo_' . $dados->id;
-              echo "<input type='radio' name='tipo' id='{$idRadio}' value='{$dados->id}'>
+              $checked = (isset($formData->tipo) && $formData->tipo == $dados->id) ? 'checked' : '';
+              echo "<input type='radio' name='tipo' id='{$idRadio}' value='{$dados->id}' $checked>
               <label for='tipo' class='radio-label'>{$dados->tipo}</label>
               ";
             }
@@ -41,15 +43,15 @@
         </div>
         <div class="form-group">
           <label for="descricao">Descrição:</label>
-          <input type="text" id="descricao" name="descricao" placeholder="Descrição da sua transação" />
+          <input type="text" id="descricao" name="descricao" value="<?= htmlspecialchars($formData->descricao  ?? '') ?>" placeholder="Descrição da sua transação" />
         </div>
         <div class="form-group">
           <label for="valor">Valor:</label>
-          <input type="text" id="valor" name="valor" placeholder="R$" />
+          <input type="text" id="valor" name="valor" value="<?= htmlspecialchars($formData->valor  ?? '') ?>" placeholder="R$" />
         </div>
         <div class="form-group">
           <label for="data">Data:</label>
-          <input type="date" id="data" name="data" />
+          <input type="date" id="data" value="<?= htmlspecialchars($formData->data  ?? '') ?>" name="data" />
         </div>
         <div class="actions">
           <button class="save" type="submit">SALVAR</button>
@@ -60,6 +62,6 @@
     <div class="back">
       <button type="button"><a href="dashboard">VOLTAR AO RESUMO</a></button>
     </div>
-  </main>
+  </main> 
 </body>
 </html>

@@ -28,4 +28,3 @@ tipos.forEach(td => {
     td.classList.add('greenColor');
   }
 });
-

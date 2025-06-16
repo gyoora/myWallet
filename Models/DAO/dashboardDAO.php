@@ -59,12 +59,44 @@
                 $stm->bindValue(2, $transacao->getData(), PDO::PARAM_STR);
                 $stm->bindValue(3, $transacao->getDescricao(),PDO::PARAM_STR);
                 $stm->bindValue(4, $transacao->getValor(), PDO::PARAM_STR);
-                $stm->bindValue(5, $transacao, PDO::PARAM_INT);
+                $stm->bindValue(5, $transacao->getId(), PDO::PARAM_INT);
                 $stm->execute();
 
                 return $stm->fetchAll(PDO::FETCH_OBJ); 
             } catch(PDOException $e) {
                 echo "Erro ao editar transação: " . $e->getMessage();
+                $this->db = null;
+                die();
+            }
+        }
+
+        public function buscarPorId(int $id) {
+            $sql = "SELECT * FROM transacoes WHERE id = ?";
+
+            try {
+                $stm = $this->db->prepare($sql);
+                $stm->bindValue(1, $id, PDO::PARAM_INT);
+                $stm->execute();
+                return $stm->fetch(PDO::FETCH_OBJ);
+            } catch (PDOException $e) {
+                echo "Erro ao buscar id." . $e->getMessage();
+                $this->db = null;
+                die();
+            }
+        }
+        
+        public function buscarSomaValores(SomaValores $somaValores) {
+            $sql = "SELECT SUM(valor) FROM transacoes WHERE MONTH(data) = ? AND YEAR(data) = 2025 AND id_usuario = ? AND tipo = ?";
+            
+            try {
+                $stm = $this->db->prepare($sql);
+                $stm->bindValue(1, $somaValores->getMes(), PDO::PARAM_STR);
+                $stm->bindValue(2, $somaValores->getIdUsuario(), PDO::PARAM_INT);
+                $stm->bindValue(3, $somaValores->getTipo(), PDO::PARAM_STR);
+                $stm->execute();
+                return $stm->fetch(PDO::FETCH_OBJ);
+            } catch(PDOException $e) {
+                echo "Erro ao buscar valores." . $e->getMessage();
                 $this->db = null;
                 die();
             }
