@@ -8,49 +8,227 @@
         }
 
         public function cadastrar() {
-            $msg = ["","",""];
+            $msg = ["", "", "", ""];
             if($_SERVER["REQUEST_METHOD"] == "POST") {
+                $senha_hash = md5($_POST["senha"]);
+                $usuario = new Usuarios(0, $_POST["nome"], $_POST["email"], $senha_hash);
+                
+                $usuarioDAO = new UsuariosDAO($this->db);
+                $emailCadastrado = $usuarioDAO->emailCadastrado($usuario);
+
+                // var_dump($emailCadastrado);
+
                 $valido = true;
-                if(empty($_POST["nome"]) || $_POST["nome"] == 0) {
-                    $msg[0] = "Insira o nome de usuário.";
-                    $valido = false;
+                if(empty($usuario->nome) || $usuario->nome == "") {
+                $msg[0] = "Insira o nome de usuário.";
+                $valido = false;
                 } else {
-                    $msg[0] = "";
+                $msg[0] = "";
                 }
-                if(empty($_POST["email"]) || $_POST["email"] == 0) {
+                if(empty($usuario->email) || $usuario->email == "") {
                     $msg[1] = "Insira seu email.";
                     $valido = false;
                 } else {
                     $msg[1] = "";
                 }
-                if(empty($_POST["senha"]) || $_POST["senha"] == 0) {
-                    $msg[2] = "A senha é obrigatória.";
+                if($emailCadastrado == true) {
+                    $msg[2] = "Email já cadastrado.";
                     $valido = false;
                 } else {
                     $msg[2] = "";
+                }                
+                if(empty($_POST["senha"]) || $_POST["senha"] == 0) {
+                    $msg[3] = "A senha é obrigatória.";
+                    $valido = false;
+                } else {
+                    $msg[3] = "";
                 }
-
                 if($valido) {
                     $usuarioDAO = new UsuariosDAO($this->db);
-
-                    $senha_hash = md5($_POST['senha']);
-                    
-                    $usuario = new Usuarios(0, $_POST['nome'], $_POST['email'], $senha_hash);
-
                     $usuarioDAO->cadastrar($usuario);
 
                     require_once "Views/login.php"; 
                     header("Location: login");
+                }  
+            }
+            require_once "Views/cadastro.php";
+        }
+
+        public function login() {
+            $msg = ["", "", ""]; // [0]email, [1]senha, [2]erro geral
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $senha_hash = md5($_POST["senha"]);
+                $usuario = new Usuarios(0, "", $_POST["email"], $senha_hash);
+                $valido = true;
+
+                if (empty($usuario->email)) {
+                    $msg[0] = "Insira seu email.";
+                    $valido = false;
+                } else {
+                    $msg[0] = "";   
                 }
 
-                require_once "Views/cadastro.php";
+                if (empty($_POST["senha"])) {
+                    $msg[1] = "Insira sua senha.";
+                    $valido = false;
+                } else {
+                    $msg[1] = "";
+                }
+
+                if ($valido) {
+                    $usuarioDAO = new UsuariosDAO($this->db);
+                    $login = $usuarioDAO->login($usuario);
+
+                    if ($login) {
+                        session_start();
+
+                        $ret = $usuarioDAO->dadosUsuario($login->id);
+
+                        if($ret) {
+                            $_SESSION['usuario'] = $ret;
+                        }
+
+                        header("Location: dashboard");
+                        exit;
+                    } else {
+                        $msg[2] = "Email ou senha incorretos. Verifique os dados inseridos.";
+                    }
+                }
+                require_once "Views/login.php";
             } else {
-                require_once "Views/cadastro.php";
+                require_once "Views/login.php";
             }
         }
 
-        public function telaLogin() {
-            require_once "Views/login.php";
+        public function dashboard() {
+            session_start();
+            $mesesDAO = new MesesDAO($this->db);
+            $ret = $mesesDAO->mostrarMeses();
+            $dashboardDAO = new DashboardDAO($this->db);
+            $mesSelecionado = $_GET['mes'] ?? 0;
+            $anoSelecionado = $_GET['ano'] ?? 0;
+            $dadostransacao = $dashboardDAO->mostrarTransaçoes($_SESSION['usuario']->id, $mesSelecionado, $anoSelecionado);
+            $anosRet = $dashboardDAO->listarAnosComTransacoes($_SESSION['usuario']->id);
+            $dadosDashboard = $dashboardDAO->mostrarDadosDashboard($_SESSION['usuario']->id, $mesSelecionado, $anoSelecionado);
+            require_once "Views/dashboard.php";
         }
+
+        public function addTransacao() {
+            session_start();
+            $tipoDAO = new Tipo_transacaoDAO($this->db);
+            $ret = $tipoDAO->mostrarTipos();
+            $msg = ["", "", "", ""];
+            if($_SERVER["REQUEST_METHOD"] == "POST") {
+                $transacao = new Transacao(0, $_POST["tipo"] ?? 0, $_POST["data"], $_POST["descricao"], $_POST["valor"] == '' ? 0 : $_POST["valor"], $_SESSION['usuario']->id);
+                $valido = true;
+                if(empty($transacao->id_tipo) || $transacao->id_tipo <= 0) {
+                    $msg[0] = "Selecione o tipo da transação.";
+                    $valido = false;
+                } else {
+                    $msg[0] = "";
+                }
+
+                if(empty($transacao->data)) {
+                    $msg[1] = "Insira a data em que foi feita a transação.";
+                    $valido = false;
+                } else {
+                    $msg[1] = "";
+                }
+                if(empty($transacao->descricao)) {
+                    $msg[2] = "Insira a descrição.";
+                    $valido = false;
+                } else {
+                    $msg[2] = "";
+                }
+                if(empty($transacao->valor) || $transacao->valor <= 0) {
+                    $msg[3] = "Insira o valor da transação. Ele deve ser maior que R$ 0,00.";
+                    $valido = false;
+                } else {
+                    $msg[3] = "";
+                }
+
+                if($valido) {
+                    $dashboardDAO = new DashboardDAO($this->db);
+                    $dashboardDAO->addTransacao($transacao);
+                    header("Location: dashboard");
+                }
+            }
+            require_once "Views/form_transacao.php";
+        }
+
+        public function deletarTransacao() {
+            session_start();
+
+            if (!isset($_SESSION['usuario'])) {
+                header("Location: login");
+                exit;
+            }
+
+            if (isset($_GET['id'])) {
+                $idTransacao = intval($_GET['id']);
+                $dashboardDAO = new DashboardDAO($this->db);
+                $deletar = $dashboardDAO->deletarTransacao($idTransacao);
+
+                if ($deletar) {
+                    header("Location: dashboard");
+                    exit;
+                } else {
+                    echo "Erro ao deletar transação.";
+                }
+            }
+        }
+
+        public function alterarTransacao() {
+            session_start();
+            $tipoDAO = new Tipo_transacaoDAO($this->db);
+            $dashboardDAO = new DashboardDAO($this->db);
+            $ret = $tipoDAO->mostrarTipos();
+            if($_SERVER["REQUEST_METHOD"] == "POST") {
+                $transacao = new Transacao($_POST["id"] ?? 0, $_POST["tipo"] ?? 0, $_POST["data"], $_POST["descricao"], $_POST["valor"] == '' ? 0 : $_POST["valor"], $_SESSION['usuario']->id);
+                $valido = true;
+                if(empty($transacao->id_tipo) || $transacao->id_tipo <= 0) {
+                    $msg[0] = "Selecione o tipo da transação.";
+                    $valido = false;
+                } else {
+                    $msg[0] = "";
+                }
+
+                if(empty($transacao->data)) {
+                    $msg[1] = "Insira a data em que foi feita a transação.";
+                    $valido = false;
+                } else {
+                    $msg[1] = "";
+                }
+                if(empty($transacao->descricao)) {
+                    $msg[2] = "Insira a descrição.";
+                    $valido = false;
+                } else {
+                    $msg[2] = "";
+                }
+                if(empty($transacao->valor) || $transacao->valor <= 0) {
+                    $msg[3] = "Insira o valor da transação. Ele deve ser maior que R$ 0,00.";
+                    $valido = false;
+                } else {
+                    $msg[3] = "";
+                }
+                if($valido) {
+                    $dashboardDAO = new DashboardDAO($this->db);
+                    $dashboardDAO->alterarTransacao($transacao);
+                    header("Location: dashboard");
+                }
+            } else if($_SERVER["REQUEST_METHOD"] == "GET") {
+                $formData = $dashboardDAO->buscarPorId($_GET["id"]);
+                $formData->data = date("Y-m-d", strtotime($formData->data));
+            }
+            require_once "Views/edit_transacao.php";
+        }
+
+        public function sair() {
+            session_unset();
+            session_destroy();  
+            header("Location: /myWallet");
+            exit();
+        }
+
     }
 ?>

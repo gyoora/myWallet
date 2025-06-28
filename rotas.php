@@ -31,6 +31,17 @@
 	$route->get("/", [HomeController::class, "home"]);
 	$route->get("/cadastro", [MyWalletController::class, "cadastrar"]);
 	$route->post("/cadastrar", [MyWalletController::class, "cadastrar"]);
-	$route->get("/login", [MyWalletController::class, "telaLogin"]);
+	$route->get("/login", [MyWalletController::class, "login"]);
+	$route->post("/login", [MyWalletController::class, "login"]);
+	$route->get("/dashboard", [MyWalletController::class, "dashboard"]);
+	$route->post("/dashboard", [MyWalletController::class, "dashboard"]);
+	$route->get("/adicionar-transacao", [MyWalletController::class, "addTransacao"]);
+	$route->post("/adicionar-transacao", [MyWalletController::class, "addTransacao"]);
+	$route->get("/deletar-transacao", [MyWalletController::class, "deletarTransacao"]);
+	$route->get("/editar-transacao", [MyWalletController::class, "alterarTransacao"]);
+	$route->get("/perfil", [PerfilController::class, "mostrarTela"]);
+	$route->post("/editar-transacao", [MyWalletController::class, "alterarTransacao"]);
+	$route->get("/sair", [MyWalletController::class, "sair"]);
+	$route->post("/gerar-pdf", [GerarPdfController::class, "gerarPdf"]);
 
 ?>
