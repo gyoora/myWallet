@@ -119,7 +119,8 @@
             $ret = $tipoDAO->mostrarTipos();
             $msg = ["", "", "", ""];
             if($_SERVER["REQUEST_METHOD"] == "POST") {
-                $transacao = new Transacao(0, $_POST["tipo"] ?? 0, $_POST["data"], $_POST["descricao"], $_POST["valor"] == '' ? 0 : $_POST["valor"], $_SESSION['usuario']->id);
+                $usuario = new Usuarios($_SESSION['usuario']->id);
+                $transacao = new Transacao(0, $_POST["tipo"] ?? 0, $_POST["data"], $_POST["descricao"], $_POST["valor"] == '' ? 0 : $_POST["valor"], $usuario->getId());
                 $valido = true;
                 if(empty($transacao->id_tipo) || $transacao->id_tipo <= 0) {
                     $msg[0] = "Selecione o tipo da transação.";
@@ -184,7 +185,8 @@
             $dashboardDAO = new DashboardDAO($this->db);
             $ret = $tipoDAO->mostrarTipos();
             if($_SERVER["REQUEST_METHOD"] == "POST") {
-                $transacao = new Transacao($_POST["id"] ?? 0, $_POST["tipo"] ?? 0, $_POST["data"], $_POST["descricao"], $_POST["valor"] == '' ? 0 : $_POST["valor"], $_SESSION['usuario']->id);
+                $usuario = new Usuarios($_SESSION['usuario']->id);
+                $transacao = new Transacao($_POST["id"] ?? 0, $_POST["tipo"] ?? 0, $_POST["data"], $_POST["descricao"], $_POST["valor"] == '' ? 0 : $_POST["valor"], $usuario->getId());
                 $valido = true;
                 if(empty($transacao->id_tipo) || $transacao->id_tipo <= 0) {
                     $msg[0] = "Selecione o tipo da transação.";

@@ -1,32 +1,27 @@
-    <?php
+<?php
+require_once "vendor/autoload.php";
+class GerarPdfController {
 
-    require_once "vendor/autoload.php";
-    class GerarPdfController {
+    public function gerarPdf() {
+        $conteudoPagina = $_POST['conteudo'] ?? '';
 
-        public function gerarPdf() {
-            $conteudoPagina = $_POST['conteudo'] ?? '';
+        if (empty($conteudoPagina)) {
+            header("Location: /dashboard");
+            exit();
+        }
 
-            if (empty($conteudoPagina)) {
-                header("Location: /dashboard");
-                exit();
-            }
+        try {
 
-            try {
-                $mpdf = new \Mpdf\mpdf([
-                    'mode' => 'utf-8',
-                    'format' => 'A4',
-                    'orientation' => 'L'
-                ]);
-
-                $mpdf->WriteHTML($conteudoPagina);
-
-                $mpdf->Output('dashboard.pdf', 'I');
-
-                header("Location: /dashboard");
-                exit();
-            } catch (Exception $e) {
-                echo "Erro ao gerar o PDF: " . $e->getMessage();
-            }
+            $dompdf = new Dompdf\Dompdf();
+            $dompdf->loadHtml($conteudoPagina);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+            ob_end_clean();
+            $dompdf->stream("dashboard.pdf", ["Attachment" => true]);
+            exit();
+        } catch (Exception $e) {
+            echo "Erro ao gerar o PDF: " . $e->getMessage();
         }
     }
-    ?>
+}
+?>

@@ -40,6 +40,7 @@
 	$route->get("/deletar-transacao", [MyWalletController::class, "deletarTransacao"]);
 	$route->get("/editar-transacao", [MyWalletController::class, "alterarTransacao"]);
 	$route->get("/perfil", [PerfilController::class, "mostrarTela"]);
+	$route->post("/alterar-nome", [PerfilController::class, "alterarNome"]);
 	$route->post("/editar-transacao", [MyWalletController::class, "alterarTransacao"]);
 	$route->get("/sair", [MyWalletController::class, "sair"]);
 	$route->post("/gerar-pdf", [GerarPdfController::class, "gerarPdf"]);

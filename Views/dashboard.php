@@ -22,7 +22,7 @@
 <body>
     <header>
         <h1>MyWallet</h1>
-        <span>Olá, <strong><a href="perfil"><?= htmlspecialchars($nome) ?></a></strong> | <button id="btn-sair">SAIR</button>
+        <span>Olá, <strong><?= htmlspecialchars($nome) ?></a></strong> | <button id="btn-sair">SAIR</button>
     </header>
     
     <div class="content">
@@ -51,15 +51,15 @@
                 <div class="summary-stats">
                     <div class="stat green">
                         <p>Receita mensal</p>
-                        <strong>R$<?= $dadosDashboard->getReceita() ?></strong>
+                        <strong id="receita">R$<?= $dadosDashboard->getReceita() ?></strong>
                     </div>
                     <div class="stat red">
                         <p>Despesa mensal</p>
-                        <strong>R$<?= $dadosDashboard->getDespesa() ?></strong>
+                        <strong id="despesa">R$<?= $dadosDashboard->getDespesa() ?></strong>
                     </div>
                     <div class="stat blue">
                         <p>Saldo Atual</p>
-                        <strong>R$<?= $dadosDashboard->getSaldoAtual() ?></strong>
+                        <strong id="saldoAtual">R$<?= $dadosDashboard->getSaldoAtual() ?></strong>
                     </div>
                 </div>
             </div>

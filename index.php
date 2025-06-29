@@ -1,26 +1,23 @@
 <?php
 	require_once "rotas.php";
 	spl_autoload_register(function($class){
+			if (strpos($class, '\\') !== false)
+				return;
+			
 		if(file_exists('Controllers/' . $class . '.php'))
-		{
 			require_once 'Controllers/' . $class . '.php';
-		}
+
 		else if(file_exists('Models/' . $class . '.php'))
-		{
 			require_once 'Models/' . $class . '.php';
-		}
+
 		else if(file_exists('Models/DAO/' . $class . '.php'))
-		{
 			require_once 'Models/DAO/' . $class . '.php';
-		}
+
 		else if(file_exists('Conexao/' . $class . '.php'))
-		{
 			require_once 'Conexao/' . $class . '.php';
-		}
+		
 		else
-		{
 			die("Arquivo não existe " . $class);
-		}
 	});
 	
 	//rotas

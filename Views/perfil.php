@@ -15,7 +15,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MyWallet - Perfil</title>
-  <link rel="icon" href="/img/icon.png" type="image/png">
+  <link rel="icon" href="img/icon.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Poltawski+Nowy:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="CSS/perfil.css">
 </head>
@@ -26,39 +26,34 @@
   </header>
 
   <main>
-    <div class="profile-box">
-      <h2>Perfil do Usuário</h2>
-
-      <div class="profile-picture">
-        <img src="https://img.myloview.com.br/posters/user-icon-human-person-symbol-avatar-login-sign-700-259624278.jpg" alt="Foto de perfil" id="preview">
-        <label for="photo-upload">Alterar Foto</label>
-        <input type="file" id="photo-upload" accept="image/*" onchange="previewPhoto(event)">
-      </div>
-
-      <div class="field-group">
-        <div>
-          <div class="field-label">Nome:</div>
-          <div class="field-placeholder">Seu nome aqui</div>
+    <form action="">      
+      <div class="profile-box">
+        <h2>Perfil do Usuário</h2>
+        <div class="field-group">
+          <div class="box">
+            <label class="field-label">Nome:</label>
+            <input class="field-placeholder" placeholder="Seu nome aqui"></input>
+          </div>
+          <button class="edit-button"><a href="alterar-nome">Alterar</a></button>
         </div>
-        <button class="edit-button">Alterar</button>
-      </div>
-
-      <div class="field-group">
-        <div>
-          <div class="field-label">E-mail:</div>
-          <div class="field-placeholder">seuemail@email.com</div>
+  
+        <div class="field-group">
+          <div class="box">
+            <label class="field-label">E-mail:</label>
+            <input class="field-placeholder" placeholder="seuemail@email.com"></input>
+          </div>
+          <button class="edit-button">Alterar</button>
         </div>
-        <button class="edit-button">Alterar</button>
-      </div>
-
-      <div class="field-group">
-        <div>
-          <div class="field-label">Senha:</div>
-          <div class="field-placeholder">********</div>
+  
+        <div class="field-group">
+          <div class="box">
+            <label class="field-label">Senha:</label>
+            <input class="field-placeholder" placeholder="********"></input>
+          </div>
+          <button class="edit-button">Alterar</button>
         </div>
-        <button class="edit-button">Alterar</button>
       </div>
-    </div>
+    </form>
   </main>
 
   <script>
